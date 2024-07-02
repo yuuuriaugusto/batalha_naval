@@ -4,8 +4,17 @@ defmodule BatalhaNaval.MixProject do
   def project do
     [
       app: :batalha_naval,
+      webdir: "lib/batalha_naval_web",
+      test_paths: ["test/batalha_naval_web/controllers", "test/batalha_naval_web/views"],
       version: "0.1.0",
       elixir: "~> 1.14",
+      eecto: "~> 3.10",
+      assets: %{
+      "phx.server" => "assets/priv/static/assets",
+      "phx.boy" => "assets/priv/static/assets"
+      },
+      # Especificamente, adicione :router_helpers aqui:
+      phoenix: {:release, "phoenix@1.7.11", [router_helpers: true]},
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
@@ -19,7 +28,7 @@ defmodule BatalhaNaval.MixProject do
   def application do
     [
       mod: {BatalhaNaval.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :phoenix, :phoenix_live_view, :ecto_sql, :postgrex, :tailwind, :esbuild]
     ]
   end
 
@@ -57,7 +66,8 @@ defmodule BatalhaNaval.MixProject do
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
-      {:bandit, "~> 1.2"}
+      {:bandit, "~> 1.2"},
+      {:plug_cowboy, "~> 2.5"}
     ]
   end
 

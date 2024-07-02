@@ -1,5 +1,8 @@
 defmodule BatalhaNavalWeb.PageLive do
   use BatalhaNavalWeb, :live_view
+  # alias BatalhaNavalWeb.Router.Helpers, as: Routes
+
+
 
   def mount(_params, _session, socket) do
     {:ok,
@@ -12,7 +15,10 @@ defmodule BatalhaNavalWeb.PageLive do
 
   def handle_event("start_game", %{"player1_name" => player1_name, "player2_name" => player2_name}, socket) do
     game = create_game(player1_name, player2_name)
-    {:noreply, push_navigate(socket, to: Routes.game_path(socket, :show, game.id))}
+    {:noreply, live_redirect(socket, to: game_path(socket, :show, game.id))}
+    # path = Routes.game_path(socket, :show, game.id)
+    # {:noreply, socket}
+    # {:noreply, live_redirect(socket, to: Routes.game_path(socket, :show, game.id))}
     # {:ok, redirect(socket, to: Routes.game_path(socket, :show, game.id))}
   end
 

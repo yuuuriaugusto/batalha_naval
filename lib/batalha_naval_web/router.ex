@@ -1,4 +1,5 @@
 defmodule BatalhaNavalWeb.Router do
+  alias BatalhaNavalWeb.GameLive
   use BatalhaNavalWeb, :router
 
   pipeline :browser do
