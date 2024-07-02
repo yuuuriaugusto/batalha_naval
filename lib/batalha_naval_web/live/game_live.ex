@@ -67,7 +67,7 @@ defmodule BatalhaNavalWeb.GameLive do
     {:noreply, assign(socket, board: new_board)}
   end
 
-  defp ship_list() do
+  def ship_list() do
     [
       %{ type: "Porta-Aviões", size: 5 },
       %{ type: "Encouraçado", size: 4 },
@@ -78,12 +78,12 @@ defmodule BatalhaNavalWeb.GameLive do
   end
 
   # Função auxiliar para criar um novo tabuleiro
-  defp create_board() do
+  def create_board() do
     for _ <- 1..10, do: for(_ <- 1..10, do: %{})
   end
 
   # Função auxiliar para atualizar o tabuleiro com um ataque
-  defp update_board(board, x, y) do
+  def update_board(board, x, y) do
     List.update_at(board, y - 1, fn row ->
       List.update_at(row, x - 1, fn cell ->
         Map.put(cell, :attacked, true)
@@ -100,7 +100,7 @@ defmodule BatalhaNavalWeb.GameLive do
     end)
   end
 
-  defp all_ships_sunk?(game, player_id) do
+  def all_ships_sunk?(game, player_id) do
     # Obtém todos os navios do jogador
     player_ships = Enum.filter(game.ships, &(&1.player_id == player_id))
 
