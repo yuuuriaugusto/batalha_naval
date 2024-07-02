@@ -1,5 +1,6 @@
 defmodule BatalhaNavalWeb.GameLive do
   use BatalhaNavalWeb, :live_view
+  use Phoenix.LiveView
 
   alias BatalhaNaval.Games
   alias BatalhaNaval.Games.Ship

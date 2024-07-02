@@ -5,6 +5,7 @@ defmodule BatalhaNavalWeb.Router do
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
+    plug :fetch_flash
     plug :fetch_live_flash
     plug :put_root_layout, html: {BatalhaNavalWeb.Layouts, :root}
     plug :protect_from_forgery
@@ -21,6 +22,7 @@ defmodule BatalhaNavalWeb.Router do
     live "/", PageLive, :index
     # get "/", PageController, :home
     live "/games/:id", GameLive, :show
+    live "/game", GameLive, :index
   end
 
   # Other scopes may use custom stacks.
