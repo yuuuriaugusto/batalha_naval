@@ -1,0 +1,12 @@
+<h1>Batalha Naval</h1>
+<.form phx-submit="start_game">
+  <div>
+    <label for="player1_name">Jogador 1:</label>
+    <.input type="text" name="player1_name" value={@player1_name} />
+  </div>
+  <div>
+    <label for="player2_name">Jogador 2:</label>
+    <.input type="text" name="player2_name" value={@player2_name} />
+  </div>
+  <button type="submit">Iniciar Jogo</button>
+</.form>

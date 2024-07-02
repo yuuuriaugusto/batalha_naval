@@ -1,0 +1,52 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/* This file is for your main application CSS */
+/* ... outros estilos ... */
+
+#game-board {
+    display: flex;
+    flex-direction: column;
+    width: 300px; /* Ajuste conforme necessário */
+    height: 300px; /* Ajuste conforme necessário */
+    border: 1px solid black;
+  }
+  
+  .row {
+    display: flex;
+  }
+  
+  .cell {
+    width: 30px; /* Ajuste conforme necessário */
+    height: 30px; /* Ajuste conforme necessário */
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  
+  .cell:hover {
+    background-color: lightblue;
+  }
+  
+  .cell[data-hit="true"] {
+    background-color: red;
+  }
+  
+  .cell[data-miss="true"] {
+    background-color: gray;
+  }
+  
+  /* Estilo para os navios */
+  .ship {
+    background-color: lightgray;
+    border: 1px solid black;
+    margin-bottom: 5px;
+    cursor: move;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+  }

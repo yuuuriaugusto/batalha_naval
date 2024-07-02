@@ -1,0 +1,58 @@
+<h1>Batalha Naval</h1>
+<h2>Jogo: <%= @game.id %></h2>
+
+<h2>Vez de: <%= @player.name %></h2>
+
+<div id="game-board">
+  <%= for {row, y} <- Enum.with_index(@board) do %>
+    <div class="row">
+      <%= for {cell, x} <- Enum.with_index(row) do %>
+        <div 
+          class="cell" 
+          phx-click="attack" 
+          data-x={x + 1} 
+          data-y={y + 1}
+          style={cell_style(cell)}
+        >
+          <%= if cell[:attacked] do %>
+            X
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<h3>Arraste e posicione seus navios:</h3>
+<div id="ship-list">
+  <%= for {ship, index} <- Enum.with_index(@ships) do %>
+    <div 
+      class="ship" 
+      draggable="true" 
+      phx-drag-start="set_ship" 
+      data-ship_index={index}
+      data-orientation="horizontal" 
+      style={"width: #{ship.size * 30}px"}
+    >
+      <%= ship.type %>
+    </div>
+  <% end %>
+</div>
+
+<.link phx-click="change_player" patch={Routes.game_path(@socket, :show, @game.id)}>Próximo jogador</.link>
+
+<script>
+  let currentOrientation = 'horizontal';
+  document.addEventListener('click', function(event) {
+    if (event.target.classList.contains('ship')) {
+      const ship = event.target;
+      currentOrientation = currentOrientation === 'horizontal' ? 'vertical' : 'horizontal';
+      ship.dataset.orientation = currentOrientation;
+
+      // Ajusta o estilo do navio para refletir a orientação
+      const shipSize = parseInt(ship.style.width, 10) / 30; // Obtém o tamanho original do navio
+      ship.style.width = currentOrientation === 'horizontal' ? `${shipSize * 30}px` : `${30}px`; // Ajusta a largura
+      ship.style.height = currentOrientation === 'horizontal' ? `${30}px` : `${shipSize * 30}px`; // Ajusta a altura
+    }
+  });
+</script>
