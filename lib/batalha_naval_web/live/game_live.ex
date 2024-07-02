@@ -11,12 +11,15 @@ defmodule BatalhaNavalWeb.GameLive do
     player = Games.get_player_by_game(game.id, player_index)
     ships = ship_list()
 
+    # Crie o board aqui:
+    board = create_board()
+
     {:ok,
       assign(socket,
         game: game,
         player: player,
         ships: ships,
-        board: create_board()
+        board: board
       )
     }
   end

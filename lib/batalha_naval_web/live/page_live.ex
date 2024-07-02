@@ -15,7 +15,7 @@ defmodule BatalhaNavalWeb.PageLive do
 
   def handle_event("start_game", %{"player1_name" => player1_name, "player2_name" => player2_name}, socket) do
     game = create_game(player1_name, player2_name)
-    {:noreply, live_redirect(socket, to: game_path(socket, :show, game.id))}
+    {:noreply, push_redirect(socket, to: ~p"/games/#{game.id}")}
     # path = Routes.game_path(socket, :show, game.id)
     # {:noreply, socket}
     # {:noreply, live_redirect(socket, to: Routes.game_path(socket, :show, game.id))}
