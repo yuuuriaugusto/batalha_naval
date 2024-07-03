@@ -7,7 +7,7 @@ defmodule BatalhaNavalWeb.GameLive do
   import Ecto.Query, only: [preload: 2] # Importe a função preload
 
   def mount(%{"id" => game_id}, _session, socket) do
-    game = Games.get_game!(game_id) |> preload([:players, :ships])
+    game = Games.get_game!(game_id) #|> preload([:players, :ships])
     player_index = if(length(game.players) == 1, do: 2, else: 1)
     player = Games.get_player_by_game(game.id, player_index)
     ships = ship_list()

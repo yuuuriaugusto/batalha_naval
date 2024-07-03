@@ -16,10 +16,10 @@ defmodule BatalhaNavalWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", BatalhaNavalWeb do
+  scope "/" do
     pipe_through :browser
 
-    live "/", PageLive, :index
+    live "/", BatalhaNavalWeb.PageLive, :index
     # get "/", PageController, :home
     live "/games/:id", GameLive, :show
     live "/game", GameLive, :index

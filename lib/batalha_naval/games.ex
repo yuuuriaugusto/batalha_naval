@@ -35,7 +35,7 @@ defmodule BatalhaNaval.Games do
       ** (Ecto.NoResultsError)
 
   """
-  def get_game!(id), do: Repo.get!(Game, id)
+  def get_game!(id), do: Repo.get!(Game, id) |> Repo.preload([:players, :ships])
 
   @doc """
   Creates a game.
@@ -292,5 +292,10 @@ defmodule BatalhaNaval.Games do
   """
   def change_ship(%Ship{} = ship, attrs \\ %{}) do
     Ship.changeset(ship, attrs)
+  end
+
+
+  def get_player_by_game(game_id, player_id) do
+    Repo.one!(from p in Player, where: p.game_id == ^game_id and p.id == ^player_id)
   end
 end
